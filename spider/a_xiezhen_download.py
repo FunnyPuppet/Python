@@ -17,13 +17,11 @@ logging.basicConfig(level=logging.INFO,  # 控制台打印的日志级别
 
 base_url = 'https://m.xiannvtu.com'
 pic_header = headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0"}
-end_list = []
 
 
 def download_page(url):
     while True:
         try:
-            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0"}
             r = requests.get(url, headers=headers)
             r.encoding = 'gbk'
             return r.text
@@ -82,7 +80,6 @@ def pic_list(href, classification):
     last_page_html = soup.select('#webpage a')
     if (len(last_page_html) == 1):
         if (last_page_html[0].get_text() == '上一页'):
-            end_list.append(classification)
             return
         else:
             last_page_url = last_page_html[0].get('href')
